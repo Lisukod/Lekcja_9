@@ -1,5 +1,6 @@
 from sys import argv
-import os
+from os import listdir
+from os.path import exists, isfile, join
 import csv
 
 src = argv[1]
@@ -7,15 +8,13 @@ dst = argv[2]
 changeList = []
 csvList = []
 
-if not os.path.exists("./csv_origin/{}".format(src)):
+if not exists("./csv_origin/{}".format(src)):
     print("Błąd. Podana ścieżka nie istnieje")
     exit()
-elif not os.path.isfile("./csv_origin/{}".format(src)):
+elif not isfile("./csv_origin/{}".format(src)):
     print("Błąd. Podana ścieżka nie jest plikiem.")
     onlyfiles = [
-        f
-        for f in os.listdir("./csv_origin/")
-        if os.path.isfile(os.path.join("./csv_origin/", f))
+        f for f in listdir("./csv_origin/") if isfile(join("./csv_origin/", f))
     ]
     print("Pliki w katalogu:\n{}".format(onlyfiles))
     exit()
